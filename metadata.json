@@ -1,0 +1,6 @@
+{
+  "name": "OBLIQUE — Contemporary Streetwear Archive",
+  "description": "International Gen Z streetwear storefront featuring an interactive 3D product carousel, oversized hoodies, baggy denim, technical cargos, sneakers, and accessories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
