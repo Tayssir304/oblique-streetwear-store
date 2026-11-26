@@ -1,51 +1,88 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# OBLIQUE — Contemporary Streetwear Store
 
-# OBLIQUE — Streetwear & Urban Archive
+A modern streetwear e-commerce experience inspired by contemporary urban fashion and Gen Z trends.
 
-Local storefront with a PHP/MySQL checkout API for XAMPP.
+## Overview
 
-## Run locally with XAMPP
+OBLIQUE is a clothing-focused e-commerce platform designed around a modern dropshipping store concept. It showcases contemporary streetwear collections, including oversized hoodies, baggy denim, cargo pants, graphic tees and accessories.
 
-1. Start **MySQL** in the XAMPP Control Panel.
-2. Import [`database/schema.sql`](database/schema.sql) into MySQL:
+The platform combines an interactive shopping experience with a modern editorial design.
 
-   ```powershell
-   C:\xampp\mysql\bin\mysql.exe --protocol=tcp -h 127.0.0.1 -P 3306 -u root < database\schema.sql
-   ```
+## Features
 
-   The script creates the dedicated `oblique_store` database, product/variant seed data, and order tables. It does not modify other databases.
-3. In phpMyAdmin's SQL tab, create a restricted application account. Replace the password with a unique, strong password:
+- Interactive 3D product carousel
+- Modern streetwear product catalogue
+- Product details and descriptions
+- Product size and color selection
+- Shopping cart functionality
+- Checkout and order submission
+- PHP API integration
+- MySQL database for products and orders
+- Responsive interface
 
-   ```sql
-   CREATE USER 'oblique_app'@'127.0.0.1' IDENTIFIED BY 'replace-with-a-strong-password';
-   GRANT SELECT, INSERT ON oblique_store.* TO 'oblique_app'@'127.0.0.1';
-   ```
+## Tech Stack
 
-4. In PowerShell, save the database credentials in your Windows user environment (not in project files):
+**Frontend**
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- Motion
 
-   ```powershell
-   [Environment]::SetEnvironmentVariable('OBLIQUE_DB_USER', 'oblique_app', 'User')
-   [Environment]::SetEnvironmentVariable('OBLIQUE_DB_PASSWORD', 'replace-with-a-strong-password', 'User')
-   $env:OBLIQUE_DB_USER = 'oblique_app'
-   $env:OBLIQUE_DB_PASSWORD = 'replace-with-a-strong-password'
-   ```
+**Backend**
+- PHP
+- MySQL
+- PDO
 
-5. In a terminal at the project root, start the PHP API with XAMPP's PHP:
+## Project Structure
 
-   ```powershell
-   C:\xampp\php\php.exe -S 127.0.0.1:8000 -t .
-   ```
+- `src/components/` — Reusable UI components
+- `src/data/` — Product information and API integration
+- `api/` — Backend endpoints
+- `database/` — Database schema
+- `public/` — Public assets
 
-6. In another terminal, start the storefront:
+## Installation
 
-   ```powershell
-   npm run dev
-   ```
+### 1. Clone the repository
 
-   Vite forwards `/api` requests to the PHP server. Open the local URL printed by Vite.
+```bash
+git clone https://github.com/YOUR_USERNAME/oblique-streetwear-store.git
+```
 
-The database host, port, and database default to `127.0.0.1:3306` and `oblique_store`; the API requires `OBLIQUE_DB_USER` and `OBLIQUE_DB_PASSWORD` to be set explicitly. It does not fall back to MySQL's root account. The Vite development server binds to localhost only.
+### 2. Install dependencies
 
-Check the API/database connection at `http://127.0.0.1:8000/api/health.php`. Checkout saves customer details and server-priced order items in MySQL. The demo records a selected payment method but does not process payments or send email.
+```bash
+npm install
+```
+
+### 3. Start the development server
+
+```bash
+npm run dev
+```
+
+### 4. Build the project
+
+```bash
+npm run build
+```
+
+## Database Setup
+
+1. Create a MySQL database.
+2. Import `database/schema.sql`.
+3. Configure your database environment variables.
+4. Start the PHP backend.
+
+## Project Goal
+
+To create a modern online clothing store experience with a focus on contemporary streetwear, interactive product presentation and a simplified shopping journey.
+
+## Status
+
+Development project.
+
+## Author
+
+Developed by **Your Name**
