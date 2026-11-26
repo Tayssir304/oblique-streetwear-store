@@ -17,6 +17,10 @@ interface CreateOrderResponse {
   orderNumber: string;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
 export async function createOrder(
   order: CreateOrderRequest
 ): Promise<CreateOrderResponse> {
@@ -33,16 +37,32 @@ export async function createOrder(
     );
   }
 
-  const result = (await response.json()) as
-    | CreateOrderResponse
-    | { error: string };
-  if (!response.ok) {
+  const contentType = response.headers.get('content-type') ?? '';
+  if (!contentType.toLowerCase().includes('application/json')) {
     throw new Error(
-      'error' in result ? result.error : 'Unable to save your order.'
+      'Online checkout is not connected. The PHP API needs a hosted server and database; your local XAMPP database cannot be reached by Vercel.'
     );
   }
-  if (!('orderNumber' in result) || typeof result.orderNumber !== 'string') {
+
+  let result: unknown;
+  try {
+    result = await response.json();
+  } catch {
+    throw new Error('The checkout API returned invalid JSON. Please try again later.');
+  }
+  if (!isRecord(result)) {
+    throw new Error('The checkout API returned an invalid response.');
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      typeof result.error === 'string'
+        ? result.error
+        : 'Unable to save your order.'
+    );
+  }
+  if (typeof result.orderNumber !== 'string') {
     throw new Error('The server returned an invalid order confirmation.');
   }
-  return result;
+  return { orderNumber: result.orderNumber };
 }

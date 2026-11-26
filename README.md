@@ -49,3 +49,7 @@ Local storefront with a PHP/MySQL checkout API for XAMPP.
 The database host, port, and database default to `127.0.0.1:3306` and `oblique_store`; the API requires `OBLIQUE_DB_USER` and `OBLIQUE_DB_PASSWORD` to be set explicitly. It does not fall back to MySQL's root account. The Vite development server binds to localhost only.
 
 Check the API/database connection at `http://127.0.0.1:8000/api/health.php`. Checkout saves customer details and server-priced order items in MySQL. The demo records a selected payment method but does not process payments or send email.
+
+## Deploying online
+
+The PHP API and XAMPP database are for local development. Vercel does not run the local PHP process and cannot reach MySQL on your computer. Online checkout requires a hosted API and a hosted database; do not expose the XAMPP database directly to the internet.
